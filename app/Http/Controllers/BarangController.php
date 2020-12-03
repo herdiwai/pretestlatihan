@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Barang;
+use App\Penjualan;
 use Illuminate\Http\Request;
 
 class BarangController extends Controller
@@ -12,6 +13,13 @@ class BarangController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function admin()
+    {
+        $barang = Barang::all();
+        $penjualan = Penjualan::all();
+        return view('admin.admin_index', compact('barang','penjualan'));
+    }
+
     public function index()
     {
         $barang = Barang::all();

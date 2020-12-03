@@ -7,9 +7,9 @@ use App\Barang;
 
 class Penjualan extends Model
 {
-    protected $fillable = ['tgl_faktur','no_faktur','nama_konsumen','kode_barang','jumlah','harga_satuan','harga_total'];
+    protected $fillable = ['no_faktur','nama_konsumen','barang_id','jumlah','harga_satuan','harga_total'];
 
-    public function barang() {
-        return $this->belongsTo(Barang::class);
-    }
+    // public function barang() {
+    //     return $this->belongsTo(Barang::class);
+    // }
 }

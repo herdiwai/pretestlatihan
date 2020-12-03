@@ -38,21 +38,25 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
     {
-        $val =$request->validate([
-            'tgl_faktur'=> 'required',
-            'no_faktur'=> 'required',
-            'nama_konsumen'=> 'required',
-            'kode_barang'=> 'required',
-            'jumlah'=> 'required|integer',
-            'harga_satuan'=> 'required'
+        $this->validate($request,[
+            'no_faktur'=> 'required|unique:penjualans',
         ]);
         
-        $c = Barang::create($val);
-        Penjual::create([
+        $id = $request->barang_id;
+        $barang = Barang::find($id);
+        $hargaSatuan = $barang['harga_jual'];
+        $hargaTotal = $hargaSatuan * $request->jumlah;
 
+        Penjualan::create([
+            'no_faktur' =>$request->no_faktur,
+            'nama_konsumen' =>$request->nama_konsumen,
+            'barang_id' =>$request->barang_id,
+            'jumlah' =>$request->jumlah,
+            'harga_satuan' =>$hargaSatuan,
+            'harga_total' =>$hargaTotal
         ]);
 
-        return redirect()->route('barang.index')->with('status', 'Barang Berhasil dibuat!');
+        return redirect()->route('penjualan.index')->with('status', 'Penjualan Berhasil dibuat!');
     }
 
     /**
@@ -95,8 +99,10 @@ class PenjualanController extends Controller
      * @param  \App\Penjualan  $penjualan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Penjualan $penjualan)
+    public function destroy($id)
     {
-        //
+        Penjualan::find($id)->delete();
+
+        return redirect()->route('penjualan.index')->with('status', 'Data Penjualan Berhasil diHapus!!');
     }
 }

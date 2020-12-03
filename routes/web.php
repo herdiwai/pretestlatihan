@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\{Route,Auth};
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +23,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('barang','BarangController');
 Route::resource('penjualan','PenjualanController');
+Route::get('/admin','BarangController@admin')->name('admin');

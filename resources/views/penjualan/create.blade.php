@@ -6,15 +6,11 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                <h4>Barang</h4>
+                <h4>Input Penjualan</h4>
             </div>
             <div class="card-body">
-                <form action="" method="POST">
+                <form action="{{ route('penjualan.store') }}" method="POST">
                     @csrf
-                    <div class="form-group">
-                        <label>Tgl Faktur</label>
-                        <input type="date" name="tgl_faktur" class="form-control">
-                    </div>
 
                     <div class="form-group">
                         <label>No Faktur</label>
@@ -27,28 +23,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Kode Barang</label>
-                        <input type="text" name="kode_barang" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Jumlah</label>
-                        <input type="text" name="jumlah" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Harga Satuan</label>
-                        <select type="text" name="kategory" class="form-control">
-                            <option value="">Pilih</option>
-                            <option value="Buku">Buku</option>
-                            <option value="Pensil">Pensil</option>
-                            <option value="Solasi">Solasi</option>
+                        <label>Barang</label>
+                        <select type="text" name="barang_id" class="form-control">
+                            @foreach($barang as $item)
+                                <option value="{{ $item->id }}">{{ $item->kode_barang }} - {{ $item->nama_barang }} - IDR . {{ $item->harga_jual }}</option>
+                            @endforeach
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label>Harga Total</label>
-                        <input type="text" name="harga_total" class="form-control">
+                        <label>Jumlah Beli</label>
+                        <input type="number" name="jumlah" class="form-control">
                     </div>
 
                     <div class="form-group">

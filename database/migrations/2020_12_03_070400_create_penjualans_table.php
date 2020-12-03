@@ -15,14 +15,13 @@ class CreatePenjualansTable extends Migration
     {
         Schema::create('penjualans', function (Blueprint $table) {
             $table->id();
-            $table->string('tgl_faktur');
+            $table->timestamps();
             $table->string('no_faktur');
             $table->string('nama_konsumen');
-            $table->unsignedBigInteger('kode_barang');
+            $table->unsignedBigInteger('barang_id');
             $table->integer('jumlah');
             $table->integer('harga_satuan');
             $table->integer('harga_total');
-            $table->timestamps();
         });
     }
 
