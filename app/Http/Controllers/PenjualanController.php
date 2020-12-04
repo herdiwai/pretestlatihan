@@ -15,8 +15,9 @@ class PenjualanController extends Controller
      */
     public function index()
     {
-        $penjualan = Penjualan::all();
-        return view('penjualan.index', compact('penjualan'));
+        $penjualan = Penjualan::paginate(3);
+        $barang = Barang::paginate(3);
+        return view('penjualan.index', compact('penjualan','barang'));
     }
 
     /**
@@ -26,7 +27,7 @@ class PenjualanController extends Controller
      */
     public function create()
     {
-        $barang = Barang::create()->all();
+        $barang = Barang::all();
         return view('penjualan.create', compact('barang'));
     }
 
@@ -39,21 +40,23 @@ class PenjualanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'no_faktur'=> 'required|unique:penjualans',
+            // 'no_faktur'=> 'required|unique:penjualans',
+            'nama_konsumen'=> 'required'
         ]);
         
         $id = $request->barang_id;
         $barang = Barang::find($id);
-        $hargaSatuan = $barang['harga_jual'];
-        $hargaTotal = $hargaSatuan * $request->jumlah;
+        $hargaSatuan = $barang['harga_beli'];
+        // $hargaTotal = $hargaSatuan * $request->jumlah;
 
+        $noid = Penjualan::all()->last()->id;
         Penjualan::create([
-            'no_faktur' =>$request->no_faktur,
             'nama_konsumen' =>$request->nama_konsumen,
             'barang_id' =>$request->barang_id,
             'jumlah' =>$request->jumlah,
             'harga_satuan' =>$hargaSatuan,
-            'harga_total' =>$hargaTotal
+            'harga_total' =>$request->jumlah * $hargaSatuan,
+            'no_faktur' =>"F00". $noid++
         ]);
 
         return redirect()->route('penjualan.index')->with('status', 'Penjualan Berhasil dibuat!');

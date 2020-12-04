@@ -3,11 +3,11 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-12">
 				<div class="card">
 					<div class="card-header">
-                        <h4>Data Master Barang</h4> 
-                        <a href="{{ route('barang.create') }}" class="btn btn-sm btn-primary">Tambah</a>
+                        <strong>Data Master Barang</strong>
+                        <a href="{{ route('barang.create') }}" class="btn btn-sm btn-primary float-right">Tambah</a>
 					</div>
 
 					<div class="card-body">
@@ -47,13 +47,12 @@
 							</table>
 					</div>
 				</div>
-            </div>
+           
 
-			<div class="col-md-6">
-				<div class="card">
+				<div class="card mt-4">
 					<div class="card-header">
-                        <h4>Data Penjualan</h4> 
-                        <a href="{{ route('penjualan.create') }}" class="btn btn-sm btn-primary">Tambah</a>
+                        <strong>Data Penjualan</strong>
+                        {{-- <a href="{{ route('penjualan.create') }}" class="btn btn-sm btn-primary float-right">Tambah</a> --}}
 					</div>
 					<div class="card-body">
 							<table class="table table-inverse">
@@ -90,9 +89,9 @@
 								@endforeach
 								</tbody>
 							</table>
-					</div>
 				</div>
 			</div>
 		</div>		
-    </div>
+	</div>
+</div>
 @endsection

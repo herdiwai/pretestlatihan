@@ -6,8 +6,8 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                <h4>Data Barang</h4>
-                <a href="{{ route('barang.create') }}" class="btn btn-sm btn-primary">Tambah Barang</a>
+                <h4 class="text-center">Data Barang</h4>
+                {{-- <a href="{{ route('barang.create') }}" class="btn btn-sm btn-primary">Tambah Barang</a> --}}
             </div>
             {{-- Alert --}}
             <div>
